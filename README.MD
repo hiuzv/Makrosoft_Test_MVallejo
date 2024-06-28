@@ -47,11 +47,13 @@ CREATE TABLE public.trabajador (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     peso_acumulado INTEGER DEFAULT 0
-);```
+);
+```
+### Inserción de Datos Iniciales en la Tabla Trabajador
 
-``` Inserción de Datos Iniciales en la Tabla Trabajador
-
+```sql
 INSERT INTO public.trabajador (nombre, peso_acumulado) VALUES
     ('Pedro', 0),
     ('Felipe', 0),
-    ('Andrea', 0);```
+    ('Andrea', 0);}
+```
