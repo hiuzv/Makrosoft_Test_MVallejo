@@ -55,5 +55,5 @@ CREATE TABLE public.trabajador (
 INSERT INTO public.trabajador (nombre, peso_acumulado) VALUES
     ('Pedro', 0),
     ('Felipe', 0),
-    ('Andrea', 0);}
+    ('Andrea', 0);
 ```
