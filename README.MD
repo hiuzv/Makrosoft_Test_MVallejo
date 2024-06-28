@@ -1,57 +1,57 @@
-Podemos asignar soportes mediante el siguiente formulario:
-![alt text](imagen1.png)
+# Sistema de Asignación de Soportes
 
-donde llenamos la informacion:
-Nombre: Nombre del soporte a realizar
-Descripcion: una descripcion basica de lo que hay que realizar de soporte
-Prioridad: (5 Mayor prioridad, 4,3,2, 1 menor prioridad)
-Peso: (1 menor peso, 2, 3, 4,5 mayor peso)
+## Descripción
 
+Este sistema permite asignar soportes a trabajadores y visualizar el estado actual de asignaciones y trabajadores.
 
-En esta tabla podemos ver el listado de trabajadores con su respectivo peso acumulado:
-![alt text](imagen2.png)
+### Asignación de Soportes
 
------------------------------------------------------------------------------------------------------------
+Para asignar un soporte, utiliza el siguiente formulario:
 
-CREACION DE LA BASE DE DATOS:
+![Formulario de Asignación](imagen1.png)
 
-la base de datos tiene la siguientes credenciales:
+- **Nombre:** Nombre del soporte a realizar.
+- **Descripción:** Descripción básica del soporte.
+- **Prioridad:** Prioridad del soporte (5 es la mayor prioridad, 1 es la menor).
+- **Peso:** Peso del soporte (5 es el mayor peso, 1 es el menor).
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password-@localhost/Makrosoft_Test_MVallejo'
+### Listado de Trabajadores y Peso Acumulado
 
-BD: Makrosoft_Test_MVallejo
-User: postgres
-Password: password
+En esta tabla puedes ver el listado de trabajadores con su respectivo peso acumulado:
 
------------------------------------------------------------------------------------------------------------
+![Listado de Trabajadores](imagen2.png)
 
-crear las siguientes tablas:
+---
 
+## Creación de la Base de Datos
+
+La base de datos utilizada tiene las siguientes credenciales:
+
+- **BD:** Makrosoft_Test_MVallejo
+- **Usuario:** postgres
+- **Contraseña:** password
+
+### Creación de Tablas
+
+```sql
 CREATE TABLE public.soportes (
-	id int4 NOT NULL DEFAULT nextval('soportes_id_seq'::regclass),
-	nombre varchar(100) NOT NULL,
-	descripcion varchar(200) NOT NULL,
-	prioridad int4 NOT NULL,
-	peso int4 NOT NULL,
-	trabajador_asignado int4 NULL,
-	CONSTRAINT soportes_pk PRIMARY KEY (id),
-	CONSTRAINT soportes_trabajador_id_fk FOREIGN KEY (trabajador_asignado) REFERENCES public.trabajador(id) ON DELETE SET NULL
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(200) NOT NULL,
+    prioridad INTEGER NOT NULL,
+    peso INTEGER NOT NULL,
+    trabajador_asignado INTEGER REFERENCES public.trabajador(id) ON DELETE SET NULL
 );
 
 CREATE TABLE public.trabajador (
-	id serial4 NOT NULL,
-	nombre varchar(50) NOT NULL,
-	peso_acumulado int4 NULL,
-	CONSTRAINT trabajador_pkey PRIMARY KEY (id)
-);
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    peso_acumulado INTEGER DEFAULT 0
+);```
 
------------------------------------------------------------------------------------------------------------
+``` Inserción de Datos Iniciales en la Tabla Trabajador
 
-Insertamos los trabajadores a la tabla trabajador:
-
-INSERT INTO public.trabajador (nombre,peso_acumulado) VALUES
-	 (1,'Pedro',0),
-	 (2,'Felipe',0),
-	 (3,'Andrea',0);
-
------------------------------------------------------------------------------------------------------------
+INSERT INTO public.trabajador (nombre, peso_acumulado) VALUES
+    ('Pedro', 0),
+    ('Felipe', 0),
+    ('Andrea', 0);```
